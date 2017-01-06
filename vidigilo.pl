@@ -17,6 +17,14 @@ butono(Klaso, Ligilo, Teksto) -->
 		)
 	).
 
+largha_butono(Largheco, Klaso, Ligilo, Teksto) -->
+	html(
+		div(
+			class='col-md-'+Largheco,
+			\butono(Klaso, Ligilo, Teksto)
+		)
+	).
+
 bildeto(Nomo) -->
 	html(
 		span(class='glyphicon glyphicon-'+Nomo, [])
@@ -74,8 +82,9 @@ kartaro(L) -->
 				td(
 					a(
 						href='kartaro',
-						\bildeto(pencil))
+						\bildeto(pencil)
 					)
+				)
 			]
 		)
 	).
@@ -117,7 +126,23 @@ well(Internajho) -->
 	html(
 		div(
 			class='well well-lg',
-			Internajho
+			p(Internajho)
+		)
+	).
+
+respondo -->
+	html(
+		div(
+			class='form-group',
+			input(
+				[
+					type=text,
+					class='form-control',
+					id=respondo,
+					placeholder='Twoja odpowiedź'
+				],
+				[]
+			)
 		)
 	).
 
@@ -135,8 +160,8 @@ ne_ensalutita(_Peto) :-
 					p('Lorem ipsum dolor sit amet')
 				]
 			),
-			div(class='col-md-6', \butono('success', '/ensalutita', 'Zaloguj')),
-			div(class='col-md-6', \butono('primary', '#', 'Załóż konto'))
+			\largha_butono(6, 'success', '/ensalutita', 'Zaloguj'),
+			\largha_butono(6, 'primary', '#', 'Załóż konto')
 		]
 	).
 
@@ -147,7 +172,7 @@ listo_da_vortoj(_Peto) :-
 		[
 			\jumbo(
 				[
-					h1('Kartoteka: kartaro'),
+					h1('Kartoteka: Rumuński A1'),
 					h2('Lista fiszek')
 				]
 			),
@@ -186,6 +211,7 @@ demando(_Peto) :-
 		[
 			\jumbo(h1('Rumuński A1')),
 			\well('brânză'),
+			\well(\respondo),
 			\butono(info, '/respondo', 'Pokaż odpowiedź')
 		]
 	).
@@ -198,7 +224,15 @@ respondo(_Peto) :-
 			\jumbo(h1('Rumuński A1')),
 			\well('brânză'),
 			\well(ser),
-			\butono(info, '/respondo', 'Przyciski'),
-			\butono(info, '/respondo', 'Przyciski')
+			div(
+				class=container,
+				[
+					\largha_butono(3, primary, /, 'Bardzo dobrze'),
+					\largha_butono(3, success, /, 'Dobrze'),
+					\largha_butono(3, warning, /, 'Słabo'),
+					\largha_butono(3, danger, /, 'Źle')
+				]
+			),
+			div(class=container, \butono(default, '/ensalutita', 'Zakończ podejście'))
 		]
 	).
