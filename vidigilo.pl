@@ -13,6 +13,11 @@ enhavo(E) -->
 		)
 	).
 
+malplena_vico -->
+	html(
+		div(class=row, &(nbsp))
+	).
+
 bildeto(Nomo) -->
 	html(
 		span(class='glyphicon glyphicon-'+Nomo, [])
@@ -366,6 +371,7 @@ listo_da_vortoj(_Peto) :-
 						]
 					),
 					\butono(info, '/ensalutita', 'Wróć do listy fiszek'),
+					\malplena_vico,
 					\butono(warning, /, 'Wyloguj')
 				]
 			)
@@ -427,7 +433,7 @@ respondo(_Peto) :-
 							\largha_butono(3, danger, /, 'Źle')
 						]
 					),
-					div(class=row, &(nbsp)),
+					\malplena_vico,
 					div(class=row, \largha_butono(12, default, '/ensalutita', 'Zakończ podejście'))
 				]
 			)
