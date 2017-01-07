@@ -13,6 +13,20 @@ enhavo(E) -->
 		)
 	).
 
+bildeto(Nomo) -->
+	html(
+		span(class='glyphicon glyphicon-'+Nomo, [])
+	).
+
+bildeto_teksto(Bildeto, Teksto) -->
+	html(
+		[
+			\bildeto(Bildeto),
+			&(nbsp),
+			Teksto
+		]
+	).
+
 butono(Klaso, Ligilo, Teksto) -->
 	html(
 		a(
@@ -33,9 +47,20 @@ largha_butono(Largheco, Klaso, Ligilo, Teksto) -->
 		)
 	).
 
-bildeto(Nomo) -->
+butono_por_fenestreto(Largheco, Klaso, Bildeto, FenestretaID, Teksto) -->
 	html(
-		span(class='glyphicon glyphicon-'+Nomo, [])
+		div(
+			class='col-md-'+Largheco,
+			button(
+				[
+					class='btn btn-block btn-lg btn-'+Klaso,
+					'data-target'="#"+FenestretaID,
+					'data-toggle'=modal,
+					type=button
+				],
+				\bildeto_teksto(Bildeto, Teksto)
+			)
+		)
 	).
 
 karto(Md, D) -->
@@ -138,6 +163,104 @@ well(Internajho) -->
 		)
 	).
 
+tekstokampo(Tipo, ID, Priskribo) -->
+	html(
+		div(
+			class='form-group',
+			[
+				label(for=ID, Priskribo),
+				input(
+					[
+						class='form-control',
+						id=ID,
+						placeholder=Priskribo,
+						type=Tipo
+					],
+					[]
+				)
+			]
+		)
+	).
+
+sendbutono(Klaso, Bildeto, Teksto) -->
+	html(
+		button(
+			[
+				class='btn btn-'+Klaso,
+				type=submit
+			],
+			\bildeto_teksto(Bildeto, Teksto)
+		)
+	).
+
+fenestreto(ID, Enhavo) -->
+	html(
+		div(
+			[
+				class='modal fade',
+				id=ID,
+				tabindex='-1',
+				role=dialog
+			],
+			div(
+				[
+					class='modal-dialog',
+					role=document
+				],
+				div(
+					class='modal-content',
+					Enhavo
+				)
+			)
+		)
+	).
+
+fenestreta_fermilo_x -->
+	html(
+		button(
+			[
+				aria-label="Close",
+				class=close,
+				'data-dismiss'=modal,
+				type=button
+			],
+			span(
+				'aria-hidden'=true,
+				&(times)
+			)
+		)
+	).
+
+fenestreta_enhavo(Titolo, Enhavo, Subo) -->
+	html(
+		[
+			div(
+				class='modal-header',
+				[
+					\fenestreta_fermilo_x,
+					h4(
+						class='modal-title',
+						Titolo
+					)
+				]
+			),
+			div(class='modal-body', Enhavo),
+			div(class='modal-footer', Subo)
+		]
+	).
+
+fenestreta_fermilo_butono(Klaso, Bildeto, Teksto) -->
+	html(
+		button(
+			[
+				class='btn btn-'+Klaso,
+				'data-dismiss'=modal,
+				type=button
+			],
+			\bildeto_teksto(Bildeto, Teksto)
+		)
+	).
+
 respondo -->
 	html(
 		div(
@@ -154,6 +277,27 @@ respondo -->
 		)
 	).
 
+fenestreta_formularo(ID, Akcio, Titolo, Kampoj, Akceptilo) -->
+	html(
+		\fenestreto(
+			ID,
+			form(
+				[
+					action=Akcio,
+					method='POST'
+				],
+				\fenestreta_enhavo(
+					Titolo,
+					Kampoj,
+					[
+						\fenestreta_fermilo_butono(default, remove, 'Zamknij'),
+						Akceptilo
+					]
+				)
+			)
+		)
+	).
+
 duma(_Peto) :-
 	reply_html_page(etoso, [], \enhavo(p(costam))).
 
@@ -162,6 +306,27 @@ ne_ensalutita(_Peto) :-
 		etoso,
 		title('Saluton!'),
 		[
+			\fenestreta_formularo(
+				ensalutu,
+				'/',
+				'Zaloguj',
+				[
+					\tekstokampo(text, uzanto, 'Użytkownik'),
+					\tekstokampo(password, pasvorto, 'Hasło')
+				],
+				\sendbutono(primary, ok, 'Zaloguj')
+			),
+			\fenestreta_formularo(
+				registrigu,
+				'/',
+				'Zarejestruj się',
+				[
+					\tekstokampo(text, uzanto, 'Użytkownik'),
+					\tekstokampo(password, pasvorto, 'Hasło'),
+					\tekstokampo(text, invitkodo, 'Kod zaproszenia')
+				],
+				\sendbutono(success, user, 'Załóż konto')
+			),
 			\jumbo(
 				[
 					h1('Witaj!'),
@@ -172,8 +337,8 @@ ne_ensalutita(_Peto) :-
 				div(
 					class=row,
 					[
-						\largha_butono(6, 'success', '/ensalutita', 'Zaloguj'),
-						\largha_butono(6, 'primary', '#', 'Załóż konto')
+						\butono_por_fenestreto(6, 'success', 'log-in', ensalutu, 'Zaloguj'),
+						\butono_por_fenestreto(6, 'primary', user, registrigu, 'Załóż konto')
 					]
 				)
 			)
