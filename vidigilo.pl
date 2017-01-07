@@ -3,7 +3,15 @@
 :- [kapo].
 
 user:body(etoso, Korpo) -->
-	html(body(div(class=container, Korpo))).
+	html(body(Korpo)).
+
+enhavo(E) -->
+	html(
+		div(
+			class=container,
+			E
+		)
+	).
 
 butono(Klaso, Ligilo, Teksto) -->
 	html(
@@ -147,7 +155,7 @@ respondo -->
 	).
 
 duma(_Peto) :-
-	reply_html_page(etoso, [], p(costam)).
+	reply_html_page(etoso, [], \enhavo(p(costam))).
 
 ne_ensalutita(_Peto) :-
 	reply_html_page(
@@ -160,8 +168,15 @@ ne_ensalutita(_Peto) :-
 					p('Lorem ipsum dolor sit amet')
 				]
 			),
-			\largha_butono(6, 'success', '/ensalutita', 'Zaloguj'),
-			\largha_butono(6, 'primary', '#', 'Załóż konto')
+			\enhavo(
+				div(
+					class=row,
+					[
+						\largha_butono(6, 'success', '/ensalutita', 'Zaloguj'),
+						\largha_butono(6, 'primary', '#', 'Załóż konto')
+					]
+				)
+			)
 		]
 	).
 
@@ -176,15 +191,19 @@ listo_da_vortoj(_Peto) :-
 					h2('Lista fiszek')
 				]
 			),
-			\karttabelo(
+			\enhavo(
 				[
-					karto(kapusta, 'varză'),
-					karto(kurczak, pui),
-					karto(mysz, 'șoarece')
+					\karttabelo(
+						[
+							karto(kapusta, 'varză'),
+							karto(kurczak, pui),
+							karto(mysz, 'șoarece')
+						]
+					),
+					\butono(info, '/ensalutita', 'Wróć do listy fiszek'),
+					\butono(warning, /, 'Wyloguj')
 				]
-			),
-			\butono(info, '/ensalutita', 'Wróć do listy fiszek'),
-			\butono(warning, /, 'Wyloguj')
+			)
 		]
 	).
 
@@ -194,13 +213,17 @@ listo_da_kartaroj(_Peto) :-
 		title('Lista kartotek'),
 		[
 			\jumbo(h1('Lista kartotek')),
-			\kartartabelo(
+			\enhavo(
 				[
-					'Rumuński A1',
-					'Esperanto A1'
+					\kartartabelo(
+						[
+							'Rumuński A1',
+							'Esperanto A1'
+						]
+					),
+					\butono(warning, /, 'Wyloguj')
 				]
-			),
-			\butono(warning, /, 'Wyloguj')
+			)
 		]
 	).
 
@@ -210,9 +233,13 @@ demando(_Peto) :-
 		title('Kartoteka: Rumuński A1'),
 		[
 			\jumbo(h1('Rumuński A1')),
-			\well('brânză'),
-			\well(\respondo),
-			\butono(info, '/respondo', 'Pokaż odpowiedź')
+			\enhavo(
+				[
+					\well('brânză'),
+					\well(\respondo),
+					\butono(info, '/respondo', 'Pokaż odpowiedź')
+				]
+			)
 		]
 	).
 
@@ -222,17 +249,22 @@ respondo(_Peto) :-
 		title('Kartoteka: Rumuński A1'),
 		[
 			\jumbo(h1('Rumuński A1')),
-			\well('brânză'),
-			\well(ser),
-			div(
-				class=container,
+			\enhavo(
 				[
-					\largha_butono(3, primary, /, 'Bardzo dobrze'),
-					\largha_butono(3, success, /, 'Dobrze'),
-					\largha_butono(3, warning, /, 'Słabo'),
-					\largha_butono(3, danger, /, 'Źle')
+					\well('brânză'),
+					\well(ser),
+					div(
+						class=row,
+						[
+							\largha_butono(3, primary, /, 'Bardzo dobrze'),
+							\largha_butono(3, success, /, 'Dobrze'),
+							\largha_butono(3, warning, /, 'Słabo'),
+							\largha_butono(3, danger, /, 'Źle')
+						]
+					),
+					div(class=row, &(nbsp)),
+					div(class=row, \largha_butono(12, default, '/ensalutita', 'Zakończ podejście'))
 				]
-			),
-			div(class=container, \butono(default, '/ensalutita', 'Zakończ podejście'))
+			)
 		]
 	).
