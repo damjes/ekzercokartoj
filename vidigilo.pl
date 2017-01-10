@@ -13,9 +13,14 @@ enhavo(E) -->
 		)
 	).
 
+vico(Enhavo) -->
+	html(
+		div(class=row, Enhavo)
+	).
+
 malplena_vico -->
 	html(
-		div(class=row, &(nbsp))
+		\vico(&(nbsp))
 	).
 
 bildeto(Nomo) -->
@@ -30,6 +35,20 @@ bildeto_teksto(Bildeto, Teksto) -->
 			&(nbsp),
 			Teksto
 		]
+	).
+
+ligilo_por_fenestreto(Datumoj, FenestretaID, Enhavo) -->
+	html(
+		a(
+			[
+				'data-target'="#"+FenestretaID,
+				'data-toggle'=modal,
+				href='#'
+			|
+				Datumoj
+			],
+			Enhavo
+		)
 	).
 
 butono(Klaso, Ligilo, Teksto) -->
@@ -75,7 +94,9 @@ karto(Md, D) -->
 				td(Md),
 				td(D),
 				td(\bildeto(pencil)),
-				td(\bildeto(remove))
+				td(
+					\ligilo_por_fenestreto([data-id=ajdi, data-nomo=nazwa], forigu, \bildeto(remove))
+				)
 			]
 		)
 	).
@@ -88,6 +109,7 @@ kartoj([karto(Md, D)| Koj]) -->
 			\kartoj(Koj)
 		]
 	).
+
 karttabelo(Listo) -->
 	html(
 		table(
@@ -114,13 +136,20 @@ kartaro(L) -->
 				td(
 					a(
 						href='/demando',
-						\bildeto('eye-open')
+						\bildeto('play-circle')
 					)
 				),
 				td(
 					a(
 						href='kartaro',
 						\bildeto(pencil)
+					)
+				),
+				td(
+					\ligilo_por_fenestreto(
+						[],
+						forigu,
+						\bildeto(remove)
 					)
 				)
 			]
@@ -145,7 +174,8 @@ kartartabelo(Koj) -->
 					[
 						th('Nazwa'),
 						th('Sprawdź'),
-						th('Edytuj')
+						th('Edytuj'),
+						th('Usuń')
 					]
 				),
 				\listo_da_kartaroj(Koj)
@@ -164,7 +194,24 @@ well(Internajho) -->
 	html(
 		div(
 			class='well well-lg',
-			p(Internajho)
+			Internajho
+		)
+	).
+
+demanda_well(Demando) -->
+	html(
+		\well(p(Demando))
+	).
+
+responda_well(Malbona, Bona) -->
+	html(
+		\well(
+			[
+				h4('Twoja odpowiedź:'),
+				p(Malbona),
+				h4('Poprawna odpowiedź:'),
+				p(Bona)
+			]
 		)
 	).
 
@@ -183,6 +230,16 @@ tekstokampo(Tipo, ID, Priskribo) -->
 					],
 					[]
 				)
+			]
+		)
+	).
+
+kashita_id_kampo -->
+	html(
+		input(
+			[
+				id=id_por_forigi,
+				type=text % hidden
 			]
 		)
 	).
@@ -303,6 +360,28 @@ fenestreta_formularo(ID, Akcio, Titolo, Kampoj, Akceptilo) -->
 		)
 	).
 
+forigjesiga_fenestreto(Akcio, Teksto) -->
+	html(
+		\fenestreta_formularo(
+			forigu,
+			Akcio,
+			'Usuwanie',
+			[
+				p(
+					[
+						'Czy na pewno chcesz usunąć ',
+						Teksto,
+						' ',
+						span(id=nomo_por_forigi, x),
+						'?'
+					]
+				),
+				\kashita_id_kampo
+			],
+			\sendbutono(danger, trash, 'Usuń')
+		)
+	).
+
 duma(_Peto) :-
 	reply_html_page(etoso, [], \enhavo(p(costam))).
 
@@ -313,7 +392,7 @@ ne_ensalutita(_Peto) :-
 		[
 			\fenestreta_formularo(
 				ensalutu,
-				'/',
+				'/ensalutita',
 				'Zaloguj',
 				[
 					\tekstokampo(text, uzanto, 'Użytkownik'),
@@ -355,6 +434,7 @@ listo_da_vortoj(_Peto) :-
 		etoso,
 		title('Lista fiszek'),
 		[
+			\forigjesiga_fenestreto('/ensalutita', 'fiszkę'),
 			\jumbo(
 				[
 					h1('Kartoteka: Rumuński A1'),
@@ -370,9 +450,17 @@ listo_da_vortoj(_Peto) :-
 							karto(mysz, 'șoarece')
 						]
 					),
-					\butono(info, '/ensalutita', 'Wróć do listy fiszek'),
+					\butono(
+						info,
+						'/ensalutita',
+						\bildeto_teksto('chevron-left', 'Wróć do listy fiszek')
+					),
 					\malplena_vico,
-					\butono(warning, /, 'Wyloguj')
+					\butono(
+						warning,
+						/,
+						\bildeto_teksto('log-out', 'Wyloguj')
+					)
 				]
 			)
 		]
@@ -383,6 +471,7 @@ listo_da_kartaroj(_Peto) :-
 		etoso,
 		title('Lista kartotek'),
 		[
+			\forigjesiga_fenestreto('/ensalutita', 'kartotekę'),
 			\jumbo(h1('Lista kartotek')),
 			\enhavo(
 				[
@@ -392,7 +481,15 @@ listo_da_kartaroj(_Peto) :-
 							'Esperanto A1'
 						]
 					),
-					\butono(warning, /, 'Wyloguj')
+					\vico(
+						\butono_por_fenestreto(12, success, ok, nova, 'Nowa kartoteka')
+					),
+					\malplena_vico,
+					\butono(
+						warning,
+						/,
+						\bildeto_teksto('log-out', 'Wyloguj')
+					)
 				]
 			)
 		]
@@ -408,7 +505,17 @@ demando(_Peto) :-
 				[
 					\well('brânză'),
 					\well(\respondo),
-					\butono(info, '/respondo', 'Pokaż odpowiedź')
+					\butono(
+						success,
+						'/respondo',
+						\bildeto_teksto(ok, 'Pokaż odpowiedź')
+					),
+					\malplena_vico,
+					\butono(
+						danger,
+						'/ensalutita',
+						\bildeto_teksto(remove, 'Zakończ podejście')
+					)
 				]
 			)
 		]
@@ -422,10 +529,9 @@ respondo(_Peto) :-
 			\jumbo(h1('Rumuński A1')),
 			\enhavo(
 				[
-					\well('brânză'),
-					\well(ser),
-					div(
-						class=row,
+					\demanda_well('brânză'),
+					\responda_well(baca, ser),
+					\vico(
 						[
 							\largha_butono(3, primary, /, 'Bardzo dobrze'),
 							\largha_butono(3, success, /, 'Dobrze'),
@@ -434,7 +540,11 @@ respondo(_Peto) :-
 						]
 					),
 					\malplena_vico,
-					div(class=row, \largha_butono(12, default, '/ensalutita', 'Zakończ podejście'))
+					\butono(
+						danger,
+						'/ensalutita',
+						\bildeto_teksto(remove, 'Zakończ podejście')
+					)
 				]
 			)
 		]

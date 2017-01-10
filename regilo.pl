@@ -5,3 +5,4 @@
 :- http_handler('/ensalutita', listo_da_kartaroj, []).
 :- http_handler('/demando', demando, []).
 :- http_handler('/respondo', respondo, []).
+:- http_handler('/statika/', http_reply_from_files('statika', []), [prefix]).
