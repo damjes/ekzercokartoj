@@ -100,7 +100,7 @@ listo_da_kartaroj(_Peto) :-
 						]
 					),
 					\vico(
-						\butono_por_fenestreto(12, success, ok, nova, 'Nowa kartoteka')
+						\butono_por_fenestreto(12, success, plus, nova, 'Nowa kartoteka')
 					),
 					\malplena_vico,
 					\butono(

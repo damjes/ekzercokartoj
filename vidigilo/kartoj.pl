@@ -8,7 +8,7 @@ karto(Md, D) -->
 				td(D),
 				td(\bildeto(pencil)),
 				td(
-					\ligilo_por_fenestreto([data-id=ajdi, data-nomo=nazwa], forigu, \bildeto(remove))
+					\ligilo_por_fenestreto([data-id=ajdi, data-nomo=nazwa], forigu, \bildeto(trash))
 				)
 			]
 		)
