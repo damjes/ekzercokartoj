@@ -8,7 +8,7 @@ kartaro(L) -->
 				td(
 					a(
 						href='/demando',
-						\bildeto('play-circle')
+						\bildeto(play)
 					)
 				),
 				td(
@@ -21,7 +21,7 @@ kartaro(L) -->
 					\ligilo_por_fenestreto(
 						[],
 						forigu,
-						\bildeto(remove)
+						\bildeto(trash)
 					)
 				)
 			]
