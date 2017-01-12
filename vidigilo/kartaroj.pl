@@ -40,7 +40,7 @@ listo_da_kartaroj([K|Koj]) -->
 kartartabelo(Koj) -->
 	html(
 		table(
-			class=table,
+			class='table table-hover',
 			[
 				tr(
 					class='hidden-xs',

@@ -26,7 +26,7 @@ kartoj([karto(Md, D)| Koj]) -->
 karttabelo(Listo) -->
 	html(
 		table(
-			class=table,
+			class='table table-hover',
 			[
 				tr(
 					class='hidden-xs',
