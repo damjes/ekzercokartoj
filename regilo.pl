@@ -1,3 +1,5 @@
+:- encoding(utf8).
+
 :- use_module(library(http/http_dispatch)).
 
 :- http_handler(/, ne_ensalutita, []).

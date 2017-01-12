@@ -1,3 +1,5 @@
+:- encoding(utf8).
+
 user:head(etoso, Kapo) -->
 	html(
 		head(

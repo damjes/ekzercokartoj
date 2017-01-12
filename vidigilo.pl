@@ -1,3 +1,5 @@
+:- encoding(utf8).
+
 :- use_module(library(http/html_write)).
 
 :- [kapo].
