@@ -5,7 +5,9 @@
 :- use_module(library(http/http_files)).
 :- use_module(library(http/http_error)).
 
-:- [regilo, vidigilo].
+:- [regilo].
+
+:- ['vidigilo/konsilu'].
 
 startu_servon :-
 	http_server(http_dispatch, [port(8080)]).
