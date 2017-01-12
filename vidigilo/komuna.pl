@@ -54,7 +54,7 @@ butono(Klaso, Ligilo, Teksto) -->
 largha_butono(Largheco, Klaso, Ligilo, Teksto) -->
 	html(
 		div(
-			class='col-md-'+Largheco,
+			class='col-sm-'+Largheco,
 			\butono(Klaso, Ligilo, Teksto)
 		)
 	).

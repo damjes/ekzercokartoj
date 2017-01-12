@@ -43,6 +43,7 @@ kartartabelo(Koj) -->
 			class=table,
 			[
 				tr(
+					class='hidden-xs',
 					[
 						th('Nazwa'),
 						th('Sprawdź'),

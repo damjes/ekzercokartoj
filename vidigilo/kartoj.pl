@@ -29,6 +29,7 @@ karttabelo(Listo) -->
 			class=table,
 			[
 				tr(
+					class='hidden-xs',
 					[
 						th('Lewa strona'),
 						th('Prawa strona'),

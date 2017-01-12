@@ -17,7 +17,7 @@ ligilo_por_fenestreto(Datumoj, FenestretaID, Enhavo) -->
 butono_por_fenestreto(Largheco, Klaso, Bildeto, FenestretaID, Teksto) -->
 	html(
 		div(
-			class='col-md-'+Largheco,
+			class='col-sm-'+Largheco,
 			button(
 				[
 					class='btn btn-block btn-lg btn-'+Klaso,
