@@ -15,7 +15,19 @@ $( document ).ready(function() {
 		var nomo_por_forigi = fonto.data('nomo')
 
 		var fenestreto = $(this)
-		fenestreto.find('#id_por_forigi').val(id_por_forigi)
+		fenestreto.find('#id').val(id_por_forigi)
 		fenestreto.find('#nomo_por_forigi').text(nomo_por_forigi)
+	})
+
+	$('#redaktu').on('show.bs.modal', function(event) {
+		var fonto = $(event.relatedTarget) // klakita butono
+		var id = fonto.data('id')
+		var maldekstra = fonto.data('maldekstra')
+		var dekstra = fonto.data('dekstra')
+
+		var fenestreto = $(this)
+		fenestreto.find('#id').val(id)
+		fenestreto.find('#maldekstra').val(maldekstra)
+		fenestreto.find('#dekstra').val(dekstra)
 	})
 });

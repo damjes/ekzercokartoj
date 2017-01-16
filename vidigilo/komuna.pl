@@ -61,18 +61,28 @@ largha_butono(Largheco, Klaso, Ligilo, Teksto) -->
 
 tekstokampo(Tipo, ID, Priskribo) -->
 	html(
+		\plenigita_tekstokampo(Tipo, ID, Priskribo, [])
+	).
+
+plenigita_tekstokampo(Tipo, ID, Priskribo, Enhavo) -->
+	html(
 		div(
 			class='form-group',
 			[
-				label(for=ID, Priskribo),
+				label(
+					for=ID,
+					[
+						Priskribo,
+						':'
+					]),
 				input(
 					[
 						class='form-control',
 						id=ID,
 						placeholder=Priskribo,
-						type=Tipo
-					],
-					[]
+						type=Tipo,
+						value=Enhavo
+					]
 				)
 			]
 		)

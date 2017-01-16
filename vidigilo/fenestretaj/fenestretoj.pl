@@ -34,12 +34,36 @@ forigjesiga_fenestreto(Akcio, Teksto) -->
 						'Czy na pewno chcesz usunąć ',
 						Teksto,
 						' ',
+						&(bdquo),
 						span(id=nomo_por_forigi, x),
+						&(rdquo),
 						'?'
 					]
 				),
 				\kashita_id_kampo
 			],
 			\sendbutono(danger, trash, 'Usuń')
+		)
+	).
+
+
+fenestreta_formularo(ID, Akcio, Titolo, Kampoj, Akceptilo) -->
+	html(
+		\fenestreto(
+			ID,
+			form(
+				[
+					action=Akcio,
+					method='POST'
+				],
+				\fenestreta_enhavo(
+					Titolo,
+					Kampoj,
+					[
+						\fenestreta_fermilo_butono(default, remove, 'Zamknij'),
+						Akceptilo
+					]
+				)
+			)
 		)
 	).

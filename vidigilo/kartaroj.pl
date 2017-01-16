@@ -1,10 +1,10 @@
 :- encoding(utf8).
 
-kartaro(L) -->
+kartaro(ID, Nomo) -->
 	html(
 		tr(
 			[
-				td(L),
+				td(Nomo),
 				td(
 					a(
 						href='/demando',
@@ -19,7 +19,10 @@ kartaro(L) -->
 				),
 				td(
 					\ligilo_por_fenestreto(
-						[],
+						[
+							'data-id'=ID,
+							'data-nomo'=Nomo
+						],
 						forigu,
 						\bildeto(trash)
 					)
@@ -29,10 +32,10 @@ kartaro(L) -->
 	).
 
 listo_da_kartaroj([]) --> [].
-listo_da_kartaroj([K|Koj]) -->
+listo_da_kartaroj([kartaro(ID, Nomo)|Koj]) -->
 	html(
 		[
-			\kartaro(K),
+			\kartaro(ID, Nomo),
 			\listo_da_kartaroj(Koj)
 		]
 	).

@@ -77,25 +77,116 @@ listo_da_vortoj(_Peto) :-
 		title('Lista fiszek'),
 		[
 			\forigjesiga_fenestreto('/ensalutita', 'fiszkę'),
-			\jumbo(
+			\fenestreta_formularo(
+				alinomu,
+				'/ensalutita',
+				'Zmień nazwę',
+				\plenigita_tekstokampo(
+					text,
+					nomo,
+					'Nazwa',
+					'stara nazwa'
+				),
+				\sendbutono(
+					primary,
+					pencil,
+					'Zmień nazwę'
+				)
+			),
+			\fenestreta_formularo(
+				redaktu,
+				'/kartaro',
+				'Edytuj fiszkę',
 				[
-					h1('Kartoteka: Rumuński A1'),
-					h2('Lista fiszek')
-				]
+					\tekstokampo(
+						text,
+						maldekstra,
+						'Lewa strona'
+					),
+					\tekstokampo(
+						text,
+						dekstra,
+						'Prawa strona'
+					),
+					\kashita_id_kampo
+				],
+				\sendbutono(
+					primary,
+					pencil,
+					'Edytuj'
+				)
+			),
+			\fenestreta_formularo(
+				aldonu,
+				'/kartaro',
+				'Dodaj fiszkę',
+				[
+					\tekstokampo(
+						text,
+						maldekstra,
+						'Lewa strona'
+					),
+					\tekstokampo(
+						text,
+						dekstra,
+						'Prawa strona'
+					)
+				],
+				\sendbutono(
+					success,
+					plus,
+					'Dodaj'
+				)
+			),
+			\jumbo(
+				h1(
+					'Kartoteka: Rumuński A1'
+				)
 			),
 			\enhavo(
 				[
-					\karttabelo(
+					\vico(
 						[
-							karto(kapusta, 'varză'),
-							karto(kurczak, pui),
-							karto(mysz, 'șoarece')
+							\butono_por_fenestreto(
+								6,
+								primary,
+								pencil,
+								alinomu,
+								'Zmień nazwę kartoteki'
+							),
+							\butono_por_fenestreto(
+								6,
+								success,
+								plus,
+								alinomu,
+								'Dodaj fiszkę'
+							)
 						]
 					),
-					\butono(
-						info,
-						'/ensalutita',
-						\bildeto_teksto('chevron-left', 'Wróć do listy fiszek')
+					\malplena_vico,
+					h2('Lista fiszek'),
+					\karttabelo(
+						[
+							karto(1, kapusta, 'varză'),
+							karto(2, kurczak, pui),
+							karto(3, mysz, 'șoarece')
+						]
+					),
+					\vico(
+						[
+							\largha_butono(
+								6,
+								info,
+								'/ensalutita',
+								\bildeto_teksto('chevron-left', 'Wróć')
+							),
+							\largha_butono(
+								6,
+								success,
+								'/demando',
+								\bildeto_teksto(play, 'Sprawdź')
+							)
+						]
 					),
 					\malplena_vico,
 					\butono(
@@ -114,13 +205,20 @@ listo_da_kartaroj(_Peto) :-
 		title('Lista kartotek'),
 		[
 			\forigjesiga_fenestreto('/ensalutita', 'kartotekę'),
+			\fenestreta_formularo(
+				nova,
+				'/ensalutita',
+				'Nowa kartoteka',
+				\tekstokampo(text, nomo, 'Nazwa kartoteki'),
+				\sendbutono(success, plus, 'Dodaj')
+			),
 			\jumbo(h1('Lista kartotek')),
 			\enhavo(
 				[
 					\kartartabelo(
 						[
-							'Rumuński A1',
-							'Esperanto A1'
+							kartaro(a, 'Rumuński A1'),
+							kartaro(b, 'Esperanto A1')
 						]
 					),
 					\vico(

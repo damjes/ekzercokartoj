@@ -1,24 +1,41 @@
 :- encoding(utf8).
 
-karto(Md, D) -->
+karto(ID, Md, D) -->
 	html(
 		tr(
 			[
 				td(Md),
 				td(D),
-				td(\bildeto(pencil)),
 				td(
-					\ligilo_por_fenestreto([data-id=ajdi, data-nomo=nazwa], forigu, \bildeto(trash))
+					\ligilo_por_fenestreto(
+						[
+							'data-id'=ID,
+							'data-maldekstra'=Md,
+							'data-dekstra'=D
+						],
+						redaktu,
+						\bildeto(pencil)
+					)
+				),
+				td(
+					\ligilo_por_fenestreto(
+						[
+							'data-id'=ID,
+							'data-nomo'=Md+' – '+D
+						],
+						forigu,
+						\bildeto(trash)
+					)
 				)
 			]
 		)
 	).
 
 kartoj([]) --> [].
-kartoj([karto(Md, D)| Koj]) -->
+kartoj([karto(ID, Md, D)| Koj]) -->
 	html(
 		[
-			\karto(Md, D),
+			\karto(ID, Md, D),
 			\kartoj(Koj)
 		]
 	).
