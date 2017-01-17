@@ -9,3 +9,4 @@
 :- http_handler('/demando', demando, []).
 :- http_handler('/respondo', respondo, []).
 :- http_handler('/statika/', http_reply_from_files('statika', []), [prefix]).
+:- http_handler('/sencimigu', sencimigu, [prefix]).
