@@ -43,28 +43,6 @@ ne_ensalutita(_Peto) :-
 							\butono_por_fenestreto(6, 'success', 'log-in', ensalutu, 'Zaloguj'),
 							\butono_por_fenestreto(6, 'primary', user, registrigu, 'Załóż konto')
 						]
-					),
-					hr([]),
-					footer(
-						class='text-center small',
-						[
-							p(
-								[
-									'copyleft by ',
-									a(href='https://matma6.net/', matma6),
-									' 2016-2017 under ',
-									a(href='https://www.openhub.net/licenses/m6pl', 'M6PL'),
-									'.'
-								]
-							),
-							p(
-								[
-									'Dumnie wspierane przez ',
-									a(href='http://www.swi-prolog.org/', 'SWI-Prolog'),
-									'.'
-								]
-							)
-						]
 					)
 				]
 			)
