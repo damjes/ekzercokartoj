@@ -1,8 +1,5 @@
 :- encoding(utf8).
 
-duma(_Peto) :-
-	reply_html_page(etoso, [], \enhavo(p(costam))).
-
 ne_ensalutita(_Peto) :-
 	reply_html_page(
 		etoso,
