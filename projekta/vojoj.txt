@@ -7,6 +7,7 @@ P /kartaro/ID/demando
   /kartaro/ID/demando/komenco
 A /kartaro/ID/redaktu
 A /nova_kartaro
+A /nova_konto
 
 P – legas POST, poste normala
 A – legas POST, poste alidirektigas

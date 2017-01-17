@@ -22,6 +22,21 @@ petero(Petero, duo(NomoS, ValoroS)) :-
 	with_output_to(string(NomoS), write_canonical(Nomo)),
 	with_output_to(string(ValoroS), write_canonical(Valoro)).
 
+post_datumoj(Peto) -->
+	{\+ member(method(post), Peto)},
+	[].
+post_datumoj(Peto) -->
+	{
+		member(method(post), Peto),
+		http_read_data(Peto, S, [to(string)])
+	},
+	html(
+		[
+			h2('POST'),
+			p(S)
+		]
+	).
+
 sencimigu(Peto) :-
 	maplist(petero, Peto, PetoLista),
 	reply_html_page(
@@ -31,6 +46,7 @@ sencimigu(Peto) :-
 			\jumbo(h1('Sencimigilo')),
 			\enhavo(
 				[
+					\post_datumoj(Peto),
 					h2('Peto'),
 					table(
 						class='table table-hover',

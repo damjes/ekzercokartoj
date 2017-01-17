@@ -79,6 +79,7 @@ plenigita_tekstokampo(Tipo, ID, Priskribo, Enhavo) -->
 					[
 						class='form-control',
 						id=ID,
+						name=ID,
 						placeholder=Priskribo,
 						type=Tipo,
 						value=Enhavo

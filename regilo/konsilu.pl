@@ -1,0 +1,1 @@
+:- [parametroj, rajtigo, regilo, vojoj].

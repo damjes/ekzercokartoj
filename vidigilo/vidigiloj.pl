@@ -1,13 +1,13 @@
 :- encoding(utf8).
 
-ne_ensalutita(_Peto) :-
+ne_ensalutita :-
 	reply_html_page(
 		etoso,
 		title('Saluton!'),
 		[
 			\fenestreta_formularo(
 				ensalutu,
-				'/ensalutita',
+				'/',
 				'Zaloguj',
 				[
 					\tekstokampo(text, uzanto, 'Użytkownik'),
@@ -17,7 +17,7 @@ ne_ensalutita(_Peto) :-
 			),
 			\fenestreta_formularo(
 				registrigu,
-				'/',
+				'/nova_konto',
 				'Zarejestruj się',
 				[
 					\tekstokampo(text, uzanto, 'Użytkownik'),
@@ -46,7 +46,8 @@ ne_ensalutita(_Peto) :-
 		]
 	).
 
-listo_da_vortoj(_Peto) :-
+listo_da_vortoj(Kartaro) :-
+	findall(karto(ID, Maldekstra, Dekstra), karto(ID, Kartaro, Maldekstra, Dekstra, _), Kartoj),
 	reply_html_page(
 		etoso,
 		title('Lista fiszek'),
@@ -140,13 +141,7 @@ listo_da_vortoj(_Peto) :-
 					),
 					\malplena_vico,
 					h2('Lista fiszek'),
-					\karttabelo(
-						[
-							karto(1, kapusta, 'varză'),
-							karto(2, kurczak, pui),
-							karto(3, mysz, 'șoarece')
-						]
-					),
+					\karttabelo(Kartoj),
 					\vico(
 						[
 							\largha_butono(
@@ -166,7 +161,7 @@ listo_da_vortoj(_Peto) :-
 					\malplena_vico,
 					\butono(
 						warning,
-						/,
+						'/elsalutu',
 						\bildeto_teksto('log-out', 'Wyloguj')
 					)
 				]
@@ -174,7 +169,9 @@ listo_da_vortoj(_Peto) :-
 		]
 	).
 
-listo_da_kartaroj(_Peto) :-
+listo_da_kartaroj :-
+	http_session_data(uzanto(Uzanto)),
+	findall(kartaro(ID, Kartaro), kartaro(ID, Uzanto, Kartaro), Kartaroj),
 	reply_html_page(
 		etoso,
 		title('Lista kartotek'),
@@ -190,19 +187,14 @@ listo_da_kartaroj(_Peto) :-
 			\jumbo(h1('Lista kartotek')),
 			\enhavo(
 				[
-					\kartartabelo(
-						[
-							kartaro(a, 'Rumuński A1'),
-							kartaro(b, 'Esperanto A1')
-						]
-					),
+					\kartartabelo(Kartaroj),
 					\vico(
 						\butono_por_fenestreto(12, success, plus, nova, 'Nowa kartoteka')
 					),
 					\malplena_vico,
 					\butono(
 						warning,
-						/,
+						'/elsalutu',
 						\bildeto_teksto('log-out', 'Wyloguj')
 					)
 				]
@@ -210,7 +202,7 @@ listo_da_kartaroj(_Peto) :-
 		]
 	).
 
-demando(_Peto) :-
+demando :-
 	reply_html_page(
 		etoso,
 		title('Kartoteka: Rumuński A1'),
@@ -236,7 +228,7 @@ demando(_Peto) :-
 		]
 	).
 
-respondo(_Peto) :-
+respondo :-
 	reply_html_page(
 		etoso,
 		title('Kartoteka: Rumuński A1'),

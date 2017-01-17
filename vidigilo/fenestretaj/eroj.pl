@@ -5,6 +5,7 @@ kashita_id_kampo -->
 		input(
 			[
 				id=id,
+				name=id,
 				type=text % hidden
 			]
 		)
