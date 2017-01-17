@@ -1,6 +1,6 @@
 :- encoding(utf8).
 
-karto(ID, Md, D) -->
+html_karto(ID, Md, D) -->
 	html(
 		tr(
 			[
@@ -35,7 +35,7 @@ kartoj([]) --> [].
 kartoj([karto(ID, Md, D)| Koj]) -->
 	html(
 		[
-			\karto(ID, Md, D),
+			\html_karto(ID, Md, D),
 			\kartoj(Koj)
 		]
 	).

@@ -1,6 +1,7 @@
 :- encoding(utf8).
 
 :- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_files)).
 
 :- http_handler(/, ne_ensalutita, []).
 :- http_handler('/kartaro', listo_da_vortoj, []).

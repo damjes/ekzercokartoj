@@ -2,11 +2,11 @@
 
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
-:- use_module(library(http/http_files)).
 :- use_module(library(http/http_error)).
 
 :- [regilo].
 
+:- ['modelo/konsilu'].
 :- ['vidigilo/konsilu'].
 
 startu_servon :-
