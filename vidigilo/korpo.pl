@@ -32,7 +32,8 @@ piedo -->
 							[
 								'Dumnie wspierane przez ',
 								a(href='http://www.swi-prolog.org/', 'SWI-Prolog'),
-								'.'
+								'. ',
+								a(href='https://github.com/matma6/ekzercokartoj', 'Kod źródłowy')
 							]
 						)
 					]
