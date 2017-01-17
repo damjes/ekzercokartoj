@@ -2,6 +2,7 @@
 
 :- use_module(library(http/http_parameters)).
 
+parametroj(id, [atom]).
 parametroj(uzanto, [string]).
 parametroj(pasvorto, [string]).
 parametroj(nomo, [string]).

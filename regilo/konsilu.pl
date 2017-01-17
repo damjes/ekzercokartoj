@@ -1,1 +1,1 @@
-:- [parametroj, rajtigo, regilo, vojoj].
+:- [kartaroj, kartoj, parametroj, rajtigo, regilo, vojoj].

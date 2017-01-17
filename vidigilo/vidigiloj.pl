@@ -176,10 +176,10 @@ listo_da_kartaroj :-
 		etoso,
 		title('Lista kartotek'),
 		[
-			\forigjesiga_fenestreto('/ensalutita', 'kartotekę'),
+			\forigjesiga_fenestreto('/forigu_kartaron', 'kartotekę'),
 			\fenestreta_formularo(
 				nova,
-				'/ensalutita',
+				'/nova_kartaro',
 				'Nowa kartoteka',
 				\tekstokampo(text, nomo, 'Nazwa kartoteki'),
 				\sendbutono(success, plus, 'Dodaj')

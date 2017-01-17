@@ -1,13 +1,13 @@
-P /
-A /elsalutu
-A /forigu_kartaron
-  /kartaro/ID
-A /kartaro/ID/alinomu
-P /kartaro/ID/demando
-  /kartaro/ID/demando/komenco
-A /kartaro/ID/redaktu
-A /nova_kartaro
-A /nova_konto
+P [x] /
+A [x] /elsalutu
+A [x] /forigu_kartaron
+  [x] /kartaro/ID
+A [ ] /kartaro/ID/alinomu
+P [ ] /kartaro/ID/demando
+  [ ] /kartaro/ID/demando/komenco
+A [ ] /kartaro/ID/redaktu
+A [x] /nova_kartaro
+A [x] /nova_konto
 
 P – legas POST, poste normala
 A – legas POST, poste alidirektigas

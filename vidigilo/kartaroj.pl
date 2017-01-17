@@ -13,7 +13,7 @@ kartaro(ID, Nomo) -->
 				),
 				td(
 					a(
-						href='kartaro',
+						href='/kartaro/'+ID,
 						\bildeto(pencil)
 					)
 				),

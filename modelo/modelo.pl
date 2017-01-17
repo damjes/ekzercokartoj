@@ -59,3 +59,6 @@ nova_uzanto(Nomo, Pasvorto, ID) :-
 	Uzanto = uzanto(ID, _, _),
 	uzanto_haketo(Nomo, Pasvorto, Uzanto),
 	nova(Uzanto).
+
+forigu(Kio) :-
+	persistency_faru(retractall(Kio)).
