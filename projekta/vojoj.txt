@@ -2,10 +2,12 @@ P [x] /
 A [x] /elsalutu
 A [x] /forigu_kartaron
   [x] /kartaro/ID
-A [ ] /kartaro/ID/alinomu
+A [x] /kartaro/ID/alinomu
 P [ ] /kartaro/ID/demando
   [ ] /kartaro/ID/demando/komenco
-A [ ] /kartaro/ID/redaktu
+A [x] /kartaro/ID/forigu_karton
+A [x] /kartaro/ID/nova_karto
+A [x] /kartaro/ID/redaktu
 A [x] /nova_kartaro
 A [x] /nova_konto
 

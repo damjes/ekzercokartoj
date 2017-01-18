@@ -19,6 +19,10 @@ traktu_peton(Peto):-
 
 :- route_post(/, ensalutu(listo_da_kartaroj)).
 :- route_post(forigu_kartaron, forigu_kartaron).
+:- route_post(kartaro/ID/alinomu, alinomu_kartaron(ID)).
+:- route_post(kartaro/ID/forigu_karton, forigu_karton(ID)).
+:- route_post(kartaro/ID/nova_karto, kreu_karton(ID)).
+:- route_post(kartaro/ID/redaktu, redaktu_karton(ID)).
 :- route_post(nova_kartaro, kreu_kartaron).
 :- route_post(nova_konto, kreu_konton).
 

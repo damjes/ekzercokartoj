@@ -47,21 +47,22 @@ ne_ensalutita :-
 	).
 
 listo_da_vortoj(Kartaro) :-
+	kartaro(Kartaro, _, Nomo),
 	findall(karto(ID, Maldekstra, Dekstra), karto(ID, Kartaro, Maldekstra, Dekstra, _), Kartoj),
 	reply_html_page(
 		etoso,
 		title('Lista fiszek'),
 		[
-			\forigjesiga_fenestreto('/ensalutita', 'fiszkę'),
+			\forigjesiga_fenestreto('/kartaro/'+Kartaro+'/forigu_karton', 'fiszkę'),
 			\fenestreta_formularo(
 				alinomu,
-				'/ensalutita',
+				'/kartaro/'+Kartaro+'/alinomu',
 				'Zmień nazwę',
 				\plenigita_tekstokampo(
 					text,
 					nomo,
 					'Nazwa',
-					'stara nazwa'
+					Nomo
 				),
 				\sendbutono(
 					primary,
@@ -71,7 +72,7 @@ listo_da_vortoj(Kartaro) :-
 			),
 			\fenestreta_formularo(
 				redaktu,
-				'/kartaro',
+				'/kartaro/'+Kartaro+'/redaktu',
 				'Edytuj fiszkę',
 				[
 					\tekstokampo(
@@ -94,7 +95,7 @@ listo_da_vortoj(Kartaro) :-
 			),
 			\fenestreta_formularo(
 				aldonu,
-				'/kartaro',
+				'/kartaro/'+Kartaro+'/nova_karto',
 				'Dodaj fiszkę',
 				[
 					\tekstokampo(
@@ -116,7 +117,10 @@ listo_da_vortoj(Kartaro) :-
 			),
 			\jumbo(
 				h1(
-					'Kartoteka: Rumuński A1'
+					[
+						'Kartoteka: ',
+						Nomo
+					]
 				)
 			),
 			\enhavo(
@@ -134,7 +138,7 @@ listo_da_vortoj(Kartaro) :-
 								6,
 								success,
 								plus,
-								alinomu,
+								aldonu,
 								'Dodaj fiszkę'
 							)
 						]
@@ -147,7 +151,7 @@ listo_da_vortoj(Kartaro) :-
 							\largha_butono(
 								6,
 								info,
-								'/ensalutita',
+								'/',
 								\bildeto_teksto('chevron-left', 'Wróć')
 							),
 							\largha_butono(

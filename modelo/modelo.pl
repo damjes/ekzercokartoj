@@ -24,9 +24,7 @@ persistency_nomoj(Farado, Tipo, Nomo) :- % kreado de: assert_iaTipo
 	atom_concat(FaradoKun, Tipo, Nomo).
 
 persistency_faru(Objekto) :-
-	%writeln(Objekto),
 	Objekto =.. [Farado, TipoKunDatumoj],
-	%writeln(TipoKunDatumoj),
 	TipoKunDatumoj =.. [Tipo | Datumoj],
 	persistency_nomoj(Farado, Tipo, NovaNomo),
 	Celo =.. [NovaNomo | Datumoj],
@@ -35,10 +33,10 @@ persistency_faru(Objekto) :-
 anstatauigi(Malnova, Nova) :-
 	with_mutex(
 		datumbaza,
-		[
+		(
 			persistency_faru(retractall(Malnova)),
 			persistency_faru(assert(Nova))
-		]
+		)
 	), !.
 
 nova(Novajho) :-
